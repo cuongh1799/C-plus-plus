@@ -6,10 +6,10 @@
   Course: EEET2482/COSC2082
   Semester: 2023-2
   Lab Assessment: 1
-  Author: Your name (e.g. Nguyen Van Minh)
-  ID: Your student id (e.g. 1234567)
-  Compiler used: Compiler version (e.g. g++ 8.1.0, type "g++ --version" to check)
-  Created  date: dd/mm/yyyy (e.g. 05/08/2023)
+  Author: Huynh Bao Cuong
+  ID: 3978719
+  Compiler used: 8.1.0
+  Created  date: 05/08/2023
   Acknowledgement:
 https://www.w3schools.com/cpp/cpp_functions_recursion.asp, 
 https://www.geeksforgeeks.org/converting-number-to-string-in-cpp/

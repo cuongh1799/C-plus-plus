@@ -1,30 +1,31 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-
-//b and a(string)
-
-int doubleVal(int Input){
-    return 2 * Input;
+int doubleVal(int num){
+    return 2 * num;
 }
 
-double doubleVal(double Input){
-    return 2 * Input;
+float doubleVal(float num){
+    return 2 * num;
 }
 
-std::string doubleVal(std::string Input){
-    return Input;
+int doubleVal(std::string str){
+    int num;
+    std::string userInput = str;
+    num = std::stoi(userInput , nullptr, 16);
+    // std::stringstream stringStream;
+    // stringStream << std::hex << str;
+    // stringStream >> num;
+    return 2 * num;
 }
 
-int main(int argc, char *argv[]){
-    std::string charToString = argv[1];
-
-    if(charToString.find('.') != std::string::npos){
-        std::cout << std::fixed << std::left << std::setprecision(2) <<doubleVal(std::stod(charToString));
+int main(int argc, char* argv[]){
+    std::string userInput = argv[1];
+    if(userInput.substr(0,2) == "0x"){
+        std::cout << "0x" << std::hex << doubleVal(userInput);
     }
-    else if(charToString.substr(0,2) == "0x"){
-        std::cout << "0x" << std::dec << doubleVal(charToString.substr(2,2));
-    }
-    
-    else std::cout << doubleVal(std::stoi(charToString));
+    else if(userInput.find(',')){
+        float num = atof(argv[1]);
+        std::cout << std::fixed << std::setprecision(2) <<doubleVal(num);
+    }else std::cout << doubleVal(std::stoi(argv[1]));
 }

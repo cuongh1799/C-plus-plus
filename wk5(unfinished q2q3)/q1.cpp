@@ -50,6 +50,7 @@ int main(int argc, char *argv[]){
     Book* ptr = new (std::nothrow) Book[3];
     if(ptr == nullptr){
             std::cerr << "Error, NULL function found.";
+            return -1;
         }
 
     for(int i = 0; i < 3; i++){

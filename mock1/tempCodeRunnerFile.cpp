@@ -1,1 +1,1 @@
-  }
+ std::cout <<  "doubleVal(float): " << doubleVal("0x19") << std::endl;
