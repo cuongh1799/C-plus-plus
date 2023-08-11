@@ -89,12 +89,16 @@ class SchoolSystem : public Student{
 
 int main(int argc, char *argv[]){
     SchoolSystem test;
+    // test.addStudent();
+    // test.addStudent();
+
     
     unsigned choice;
 
     std::cout << "School Management System\n";
     std::cout << "1. View all students\n" << "2. Add Student\n" << "3. Remove Student\n" << "4. Exit\n" << "Enter your Choice: ";
     std::cin >> choice;
+    std::cin.ignore(1, '\n');
 
     if(choice == 1){
         std::string tmp;
@@ -117,6 +121,21 @@ int main(int argc, char *argv[]){
         std::string tmp;
         std::fstream myfile;
         myfile.open("students.dat", std::ios::in);
+
+        while(1){
+            if(myfile.peek() != EOF){
+            std::getline(myfile, tmp, ',');
+            Student tmpStudent;
+            tmpStudent.name = tmp;
+            myfile >> tmpStudent.studentID;
+            myfile.ignore();
+            test.students.push_back(tmpStudent);
+            }
+            else if(myfile.peek() == EOF){
+                break;
+            }
+        }
+
         while(std::getline(myfile, tmp, ',')){
             Student tmpStudent;
             tmpStudent.name = tmp;
@@ -126,18 +145,10 @@ int main(int argc, char *argv[]){
         }
         myfile.close();
         test.addStudent();
-        for(int i = 0; i < test.students.size() - 1; i++){
+        for(int i = 0; i < test.students.size(); i++){
             std::cout << test.students[i].toString();
         }
         
-        // myfile.open("students.dat", std::ios::out);
-        // for(int i = 0; i < test.students.size() - 1; i++){
-        //     std::string tmp ;
-        //     tmp = test.students[i].toString2();
-        //     tmp.clear();
-        //     myfile << tmp;
-            
-        // }
     }
 
 }
