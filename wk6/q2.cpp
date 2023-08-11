@@ -4,13 +4,7 @@
 #include <fstream>
 #include <sstream>
 
-// void constructorCalled(){
-//     std::cout << "Constructor called\n";
-// }
 
-// void destructorCalled(){
-//     std::cout << "Destructor called\n";
-// }
 
 class Student{
     public: 
@@ -18,10 +12,9 @@ class Student{
         int studentID;
 
         Student(){
-            // constructorCalled();
+ 
         };
         Student(std::string nameInput, int idInput){
-            // constructorCalled();
             name = nameInput;
             studentID = idInput;
         }
@@ -38,7 +31,7 @@ class Student{
         friend std::ostream& operator <<(std::ostream& output, Student& test);
 
         ~Student(){
-            // destructorCalled();
+
         }
 };
 
@@ -89,12 +82,8 @@ class SchoolSystem : public Student{
 
 int main(int argc, char *argv[]){
     SchoolSystem test;
-    // test.addStudent();
-    // test.addStudent();
 
-    
     unsigned choice;
-
     std::cout << "School Management System\n";
     std::cout << "1. View all students\n" << "2. Add Student\n" << "3. Remove Student\n" << "4. Exit\n" << "Enter your Choice: ";
     std::cin >> choice;
@@ -130,25 +119,22 @@ int main(int argc, char *argv[]){
             myfile >> tmpStudent.studentID;
             myfile.ignore();
             test.students.push_back(tmpStudent);
+            tmp.clear();
             }
             else if(myfile.peek() == EOF){
+                tmp.clear();
                 break;
             }
         }
-
-        while(std::getline(myfile, tmp, ',')){
-            Student tmpStudent;
-            tmpStudent.name = tmp;
-            myfile >> tmpStudent.studentID;
-            myfile.ignore();
-            test.students.push_back(tmpStudent);
-        }
         myfile.close();
+
         test.addStudent();
+        myfile.open("students.dat", std::ios::out);
         for(int i = 0; i < test.students.size(); i++){
-            std::cout << test.students[i].toString();
+            tmp = test.students[i].toString2();
+            myfile << tmp;
+            tmp.clear();
         }
-        
     }
 
 }
