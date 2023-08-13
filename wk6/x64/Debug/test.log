@@ -1,0 +1,9 @@
+﻿  q1.cpp
+  q2.cpp
+D:\Uni\C++\wk6\q2.cpp(65,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Uni\C++\wk6\q2.cpp(75,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  tempCodeRunnerFile.cpp
+  Generating Code...
+q2.obj : error LNK2005: main already defined in q1.obj
+MSVCRTD.lib(exe_winmain.obj) : error LNK2019: unresolved external symbol WinMain referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+D:\Uni\C++\wk6\x64\Debug\test.exe : fatal error LNK1120: 1 unresolved externals

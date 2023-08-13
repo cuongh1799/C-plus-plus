@@ -1,34 +1,18 @@
-// C++ program to illustrate
-// concept of Virtual Functions
-
 #include <iostream>
-using namespace std;
+#include <string>
+#include <vector>
+#include <fstream>
+#include <sstream>
 
-class base {
-public:
-	virtual void print() { cout << "print base class\n"; }
+int main(){
+	std::vector<int> vec;
 
-	void show() { cout << "show base class\n"; }
-};
+	vec.push_back(6);
+	vec.push_back(-17);
+	vec.push_back(12);
 
-class derived : public base {
-public:
-	void print() { cout << "print derived class\n"; }
-
-	void show() { cout << "show derived class\n"; }
-};
-
-int main()
-{
-	base* bptr;
-	derived d;
-	bptr = &d;
-
-	// Virtual function, binded at runtime
-	bptr->print();
-
-	// Non-virtual function, binded at compile time
-	bptr->show();
-
-	return 0;
+	
+	std::cout << vec[1];
 }
+	
+	

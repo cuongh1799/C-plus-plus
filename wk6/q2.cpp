@@ -66,7 +66,9 @@ class SchoolSystem : public Student{
             for(int i = 0; i < size; i++){
                 if(students[i].studentID == ID){
                     students.erase(students.begin()+i);
+                    std::cout << "deleted !" << std::endl;
                 }
+                else continue;
             }
 
         }
@@ -93,6 +95,11 @@ int main(int argc, char *argv[]){
         std::string tmp;
         std::fstream myfile;
         myfile.open("students.dat", std::ios::in);
+
+        //copy dat file data to vector
+        //getline until "," then copy it as tmpstudent.name
+        //cin the rest from file and save it as tmpstudent.studentID, then ignore the "\n"
+        //then add tmpstudent to the test vector
         while(std::getline(myfile, tmp, ',')){
             Student tmpStudent;
             tmpStudent.name = tmp;
@@ -105,12 +112,15 @@ int main(int argc, char *argv[]){
         }
 
     }
-    
-    if((choice == 2)){
+    else if((choice == 2)){
         std::string tmp;
         std::fstream myfile;
         myfile.open("students.dat", std::ios::in);
 
+        //If not EOF, getline until "," then copy tmp to tmpstudent.name
+        //std::cin the rest as tmpstudent.studentID. ignore the "\n"
+        //then push tmpstudent to test vector
+        //clear tmp string to record the next line
         while(1){
             if(myfile.peek() != EOF){
             std::getline(myfile, tmp, ',');
@@ -129,6 +139,8 @@ int main(int argc, char *argv[]){
         myfile.close();
 
         test.addStudent();
+
+        //create new file and copy the vector data to the file
         myfile.open("students.dat", std::ios::out);
         for(int i = 0; i < test.students.size(); i++){
             tmp = test.students[i].toString2();
@@ -136,5 +148,35 @@ int main(int argc, char *argv[]){
             tmp.clear();
         }
     }
+    else if(choice == 3){
+        //Copy dat file data to vector
+        std::string tmp;
+        std::fstream myfile;
+        myfile.open("students.dat", std::ios::in);     
+        while(1){
+            if(myfile.peek() != EOF){
+            std::getline(myfile, tmp, ',');
+            Student tmpStudent;
+            tmpStudent.name = tmp;
+            myfile >> tmpStudent.studentID;
+            myfile.ignore();
+            test.students.push_back(tmpStudent);
+            tmp.clear();
+            }
+            else if(myfile.peek() == EOF){
+                tmp.clear();
+                break;
+            }
+        }
+        myfile.close();
 
+        test.removeStudent();
+        myfile.open("students.dat", std::ios::out);
+        for(int i = 0; i < test.students.size(); i++){
+            tmp = test.students[i].toString2();
+            myfile << tmp;
+            tmp.clear();
+        }
+
+    }
 }
