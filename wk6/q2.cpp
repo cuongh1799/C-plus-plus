@@ -56,6 +56,7 @@ class SchoolSystem : public Student{
             std::cin >> tmp;
             std::cin.ignore();
             students.push_back(tmp);
+            std::cout << "Added !" << std::endl;
         }
 
         void removeStudent(){
@@ -107,7 +108,7 @@ int main(int argc, char *argv[]){
             myfile.ignore();
             test.students.push_back(tmpStudent);
         }
-        for(int i = 0; i < test.students.size() - 1; i++){
+        for(int i = 0; i < test.students.size() ; i++){
             std::cout << test.students[i].toString();
         }
 
@@ -139,6 +140,7 @@ int main(int argc, char *argv[]){
         myfile.close();
 
         test.addStudent();
+
 
         //create new file and copy the vector data to the file
         myfile.open("students.dat", std::ios::out);
@@ -177,6 +179,8 @@ int main(int argc, char *argv[]){
             myfile << tmp;
             tmp.clear();
         }
-
+    }
+    else if(choice == 4){
+        std::cout << "Goodbye";
     }
 }
