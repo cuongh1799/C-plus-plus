@@ -41,6 +41,7 @@ class matrix{
             for(int i = 0; i < 3; i++){
                 std::cout << bottomrow[i] << " ";
             }
+            std::cout << "\n";
             
         }
 
@@ -57,32 +58,107 @@ class matrix{
             }
         }
         friend matrix operator+(matrix obj1, matrix obj2);
-        friend std::istream& operator >>(std::istream& input, matrix obj);
+        friend matrix operator-(matrix obj1, matrix obj2);
+        friend matrix operator*(matrix obj, int num);
+        friend matrix operator*(matrix obj1, matrix obj2);
 };
 
-std::istream& operator >>(std::istream& input, matrix& obj){
-    
+matrix operator*(matrix obj1, matrix obj2){
+    matrix result;
+
+    //top row
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            if(j == 0){
+                result.toprow[i] += obj1.toprow[j] * obj2.toprow[i];
+                result.middlerow[i] += obj1.middlerow[j] * obj2.toprow[i];
+                result.bottomrow[i] += obj1.bottomrow[j] * obj2.toprow[i];
+            }
+            else if(j == 1){
+                result.toprow[i] += obj1.toprow[j] * obj2.middlerow[i];
+                result.middlerow[i] += obj1.middlerow[j] * obj2.middlerow[i];
+                result.bottomrow[i] += obj1.bottomrow[j] * obj2.middlerow[i];
+            }
+            else if(j == 2){
+                result.toprow[i] += obj1.toprow[j] * obj2.bottomrow[i];
+                result.middlerow[i] += obj1.middlerow[j] * obj2.bottomrow[i];
+                result.bottomrow[i] += obj1.bottomrow[j] * obj2.bottomrow[i];
+            }
+            
+        }
+    }
+
+    //middle row
+    for(int i = 0; i < 3; i++){
+
+    }
+    //bottom row
+    return result;
+}
+
+matrix operator*(matrix obj, int num){
+    matrix result;
+    for(int i = 0; i < 3; i++){
+        result.toprow[i] = obj.toprow[i] * num;
+    }
+
+    for(int i = 0; i < 3; i++){
+        result.middlerow[i] = obj.middlerow[i] * num;
+    }
+
+    for(int i = 0; i < 3; i++){
+        result.bottomrow[i] = obj.bottomrow[i] * num;
+    }
+
 }
 
 matrix operator+(matrix obj1, matrix obj2){
     matrix result;
     for(int i = 0; i < 3; i++){
-        result.toprow[i] = obj1.toprow[i] + obj1.toprow[i];
+        result.toprow[i] = obj1.toprow[i] + obj2.toprow[i];
     }
     for(int i = 0; i < 3; i++){
-        result.middlerow[i] = obj1.middlerow[i] + obj1.middlerow[i];
+        result.middlerow[i] = obj1.middlerow[i] + obj2.middlerow[i];
     }
     for(int i = 0; i < 3; i++){
-        result.bottomrow[i] = obj1.bottomrow[i] + obj1.bottomrow[i];
+        result.bottomrow[i] = obj1.bottomrow[i] + obj2.bottomrow[i];
     }
     return result;
 }
 
+matrix operator-(matrix obj1, matrix obj2){
+    matrix result;
+    for(int i = 0; i < 3; i++){
+        result.toprow[i] = obj1.toprow[i] - obj2.toprow[i];
+    }
+    for(int i = 0; i < 3; i++){
+        result.middlerow[i] = obj1.middlerow[i] - obj2.middlerow[i];
+    }
+    for(int i = 0; i < 3; i++){
+        result.bottomrow[i] = obj1.bottomrow[i] - obj2.bottomrow[i];
+    }
+    return result;
+}
+
+
 int main(int argc, char* agrv[]){
     matrix pog;
     pog(2,1) = 9;
-    pog.print();
-    matrix test1, test2, test3;
-    
+    //pog.print();
+    matrix test1, test2, test3, test4, test5;
+    test1.settop(1,3,0);
+    test1.setmiddle(0,1,3);
+    test1.setbottom(0,0,1);
+
+    test2.settop(1,0,0);
+    test2.setmiddle(4,1,0);
+    test2.setbottom(0,4,1);
+
+    test3 = test1 + test2;
+    test4 = test1 - test2;
+    test5 = test1 * test2;
+    // test3.print();
+    // test4.print();
+    test5.print();
 
 }
