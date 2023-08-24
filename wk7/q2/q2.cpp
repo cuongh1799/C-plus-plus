@@ -157,8 +157,11 @@ int main(int argc, char* agrv[]){
     test3 = test1 + test2;
     test4 = test1 - test2;
     test5 = test1 * test2;
-    // test3.print();
-    // test4.print();
+    std::cout << "testing operator +\n";
+    test3.print();
+    std::cout << "testing operator -\n";
+    test4.print();
+    std::cout << "testing operator *\n"; 
     test5.print();
 
 }
