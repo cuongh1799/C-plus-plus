@@ -89,18 +89,23 @@ void deleteNode(Node *&head, Node *&end, Node *delNode){
     }
 }
 
-void swapNode(Node *n1, Node *n2){
-    Node temp1;
-    Node temp2;
-    // establish a clone node
-    temp1.NextNode = n1->NextNode;
-    temp1.lastNode = n1->lastNode;
+void swapNode(Node *&head, Node *n1, Node *&end ,Node *n2){
+    n2->lastNode = n1->lastNode;
+    n1->lastNode = n2;
+    n1->NextNode = n2->NextNode;
+    n2->NextNode = n1;
 
-    temp2.NextNode = n2->NextNode;
-    temp2.lastNode = n2->lastNode;
-
-    // copy clone node to n2
-    n1->NextNode = temp2.NextNode;  
+        //position head pointer to the correct position if head is pointing to node pointed by first pointer
+    if(head != n1)
+        n2->lastNode->NextNode = n2;
+    else
+        head = n2;
+    
+    //position tail pointer to the correct position if tail is pointing to node pointed by second pointer
+    if(end != n1)
+        n1->NextNode->lastNode = n1;
+    else
+        end = n1;
 
 }
 
@@ -127,11 +132,13 @@ int main(int argc, char* argv[]){
     Node n6(200);
     insertNode(head, end, nullptr, &n6);
     insertNode(head, end, &n2, &n5);
-    printForward(head);
-    std::cout << "\n";
+    // printForward(head);
+    // std::cout << "\n";
+
     deleteNode(head, end, &n4);
-    printForward(head);
-    std::cout << "\n";
-    swapNode(&n1, &n6);
+    // printForward(head);
+    // std::cout << "\n";
+
+    swapNode( head ,&n1, end, &n3);
     printForward(head);
 }

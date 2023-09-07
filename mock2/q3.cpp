@@ -166,6 +166,24 @@ int main(int argc, char* argv[]){
     }
     
     // BUYING SYSTEM
+    while(1){
     int userchoice;
-    std::cout << "Type 1-3 to add product to cart, 0 to exit, 4 to checkout";
+    std::cout << "Type 1- "<< shopList[shopchoice].ProductList.size()
+    << " to add product to cart, 0 to exit, 4 to checkout: ";
+    int userChoice;
+    std::cin >> userchoice;
+    if(userChoice == 0){
+        return 0;
+    }
+    else if(userChoice == 4){
+        //checkout
+    }
+    else if(userchoice > shopList[shopchoice].ProductList.size()){
+        std::cout << "Invalid choice!";
+    }
+    else{
+        accountlist[accountID].addtoCart(shopList[shopchoice].ProductList[userChoice]);
+        std::cout << "Added successful!";
+    }
 }
+    }
