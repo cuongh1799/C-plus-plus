@@ -1,0 +1,1 @@
+std::cout << "Receipt ID: " << theBill[i].returnBillID() << std::endl;
